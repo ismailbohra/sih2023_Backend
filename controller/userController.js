@@ -128,7 +128,6 @@ export const userDetailsController = async (req, res) => {
           },
           barValue: user.reasoning * 10,
           value: "25,970",
-          png: UilUsdSquare,
           series: [
             {
               name: "Sales",
@@ -144,7 +143,6 @@ export const userDetailsController = async (req, res) => {
           },
           barValue: user.timeManagement * 10,
           value: "14,270",
-          png: UilMoneyWithdrawal,
           series: [
             {
               name: "Revenue",
@@ -161,7 +159,6 @@ export const userDetailsController = async (req, res) => {
           },
           barValue: user.communication * 10,
           value: "4,270",
-          png: UilClipboardAlt,
           series: [
             {
               name: "Expenses",
@@ -178,7 +175,6 @@ export const userDetailsController = async (req, res) => {
           },
           barValue: user.mathematics * 10,
           value: "4,270",
-          png: UilClipboardAlt,
           series: [
             {
               name: "Expenses",
@@ -194,7 +190,6 @@ export const userDetailsController = async (req, res) => {
           },
           barValue: user.decisionMaking * 10,
           value: "14,270",
-          png: UilMoneyWithdrawal,
           series: [
             {
               name: "Revenue",
@@ -210,7 +205,6 @@ export const userDetailsController = async (req, res) => {
           },
           barValue: user.attentionSpan * 10,
           value: "25,970",
-          png: UilUsdSquare,
           series: [
             {
               name: "Sales",

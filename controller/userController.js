@@ -8,12 +8,7 @@ export const registerController = async (req, res) => {
       username,
       email,
       password,
-      role,
-      aptitude,
-      reasoning,
-      verbal,
-      reactionTime,
-      subjects,
+      role
     } = req.body;
     //validation
     if (!username) {
@@ -42,12 +37,7 @@ export const registerController = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      role,
-      aptitude: role === "student" ? aptitude : undefined,
-      reasoning: role === "student" ? reasoning : undefined,
-      verbal: role === "student" ? verbal : undefined,
-      reactionTime: role === "student" ? reactionTime : undefined,
-      subjects: role === "teacher" ? subjects : undefined,
+      role
     }).save();
 
     // Preparing the user details for response
@@ -135,10 +125,12 @@ export const userDetailsController = async (req, res) => {
     let performanceMetrics = {};
     if (user.role === "student") {
       performanceMetrics = {
-        aptitude: user.aptitude,
         reasoning: user.reasoning,
-        verbal: user.verbal,
-        reactionTime: user.reactionTime,
+        timeManagement: user.timeManagement,
+        communication: user.communication,
+        mathematics: user.mathematics,
+        decisionMaking: user.decisionMaking,
+        attentionSpan: user.attentionSpan,
       };
     }
     res.status(200).send({

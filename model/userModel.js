@@ -1,8 +1,5 @@
-// models/User.js
-
 import mongoose from 'mongoose';
 
-//const { Schema, model } = mongoose;
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -31,19 +28,27 @@ const userSchema = new mongoose.Schema({
   },
   // Additional fields based on the user role
   // For students
-  aptitude: {
-    type: Number,
-    default: 0,
-  },
   reasoning: {
     type: Number,
     default: 0,
   },
-  verbal: {
+  timeManagement: {
     type: Number,
     default: 0,
   },
-  reactionTime: {
+  communication: {
+    type: Number,
+    default: 0,
+  },
+  mathematics: {
+    type: Number,
+    default: 0,
+  },
+  decisionMaking: {
+    type: Number,
+    default: 0,
+  },
+  attentionSpan: {
     type: Number,
     default: 0,
   },

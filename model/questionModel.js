@@ -1,32 +1,45 @@
-// models/Question.js
-
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema({
   category: {
-    type: mongoose.ObjectId,
-    ref: 'Category',
+    type: String,
     required: true,
+    enum: [
+      "attentionSpan",
+      "decisionMaking",
+      "mathematics",
+      "communication",
+      "timeManagement",
+      "reasoning",
+    ],
   },
   text: {
     type: String,
     required: true,
   },
   type: {
-    type: String, // e.g., 'aptitude', 'reasoning', 'verbal', 'reactionTime'
+    type: String,
     required: true,
+    enum: ["audio", "textual", "video", "image"],
   },
-  options: {
-    type: [String], // Array of options for multiple-choice questions
-    default: null,
-  },
-  correctAnswer: {
-    type: String, // The correct answer for multiple-choice questions
-    default: null,
+  options: [
+    {
+      value: {
+        type: String,
+        required: true,
+      },
+      weight: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
+  link: {
+    type: String,
+    default: "",
   },
 });
 
-const Question = mongoose.model('Question', questionSchema);
+const Question = mongoose.model("Question", questionSchema);
 
 export default Question;

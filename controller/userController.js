@@ -119,9 +119,18 @@ export const userDetailsController = async (req, res) => {
     }
     let performanceMetrics = {};
     if (user.role === "student") {
+  
+    let history_reasoning=user.history.find(e=>e.category=="reasoning").value
+    let history_timeManagement=user.history.find(e=>e.category=="timeManagement").value
+    let history_communication=user.history.find(e=>e.category=="communication").value
+    let history_mathematics=user.history.find(e=>e.category=="mathematics").value
+    let history_decisionMaking=user.history.find(e=>e.category=="decisionMaking").value
+    let history_attentionSpan=user.history.find(e=>e.category=="attentionSpan").value
+  
+
       performanceMetrics = [
         {
-          title: "Rasoning",
+          title: "Reasoning",
           color: {
             backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
             boxShadow: "0px 10px 20px 0px #e0c6f5",
@@ -130,8 +139,8 @@ export const userDetailsController = async (req, res) => {
           value: "25,970",
           series: [
             {
-              name: "Sales",
-              data: [31, 40, 28, 51, 42, 109, 100],
+              name: "Reasoning",
+              data: history_reasoning,
             },
           ],
         },
@@ -145,8 +154,8 @@ export const userDetailsController = async (req, res) => {
           value: "14,270",
           series: [
             {
-              name: "Revenue",
-              data: [10, 100, 50, 70, 80, 30, 40],
+              name: "Time Management",
+              data: history_timeManagement,
             },
           ],
         },
@@ -161,8 +170,8 @@ export const userDetailsController = async (req, res) => {
           value: "4,270",
           series: [
             {
-              name: "Expenses",
-              data: [10, 25, 15, 30, 12, 15, 20],
+              name: "Communication",
+              data: history_communication,
             },
           ],
         },
@@ -177,8 +186,8 @@ export const userDetailsController = async (req, res) => {
           value: "4,270",
           series: [
             {
-              name: "Expenses",
-              data: [10, 25, 15, 30, 12, 15, 20],
+              name: "Mathematics",
+              data: history_mathematics,
             },
           ],
         },
@@ -192,8 +201,8 @@ export const userDetailsController = async (req, res) => {
           value: "14,270",
           series: [
             {
-              name: "Revenue",
-              data: [10, 100, 50, 70, 80, 30, 40],
+              name: "Decision Making",
+              data: history_decisionMaking,
             },
           ],
         },
@@ -207,8 +216,8 @@ export const userDetailsController = async (req, res) => {
           value: "25,970",
           series: [
             {
-              name: "Sales",
-              data: [31, 40, 28, 51, 42, 109, 100],
+              name: "Attention Span",
+              data: history_attentionSpan,
             },
           ],
         },

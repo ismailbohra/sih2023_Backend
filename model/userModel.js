@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -18,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['student', 'teacher'],
+    enum: ["student", "teacher"],
     required: true,
   },
   // Common fields for both students and teachers
@@ -52,6 +51,12 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  history: [
+    {
+      category: String,
+      value: [String],
+    },
+  ],
   // For teachers
   subjects: [
     {
@@ -62,13 +67,13 @@ const userSchema = new mongoose.Schema({
       categories: [
         {
           type: mongoose.ObjectId,
-          ref: 'Category',
+          ref: "Category",
         },
       ],
     },
   ],
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

@@ -96,6 +96,7 @@ export const loginController = async (req, res) => {
         _id: user._id,
         name: user.username,
         email: user.email,
+        role: user.role,
       },
       token,
     });
@@ -119,14 +120,24 @@ export const userDetailsController = async (req, res) => {
     }
     let performanceMetrics = {};
     if (user.role === "student") {
-  
-    let history_reasoning=user.history.find(e=>e.category=="reasoning").value
-    let history_timeManagement=user.history.find(e=>e.category=="timeManagement").value
-    let history_communication=user.history.find(e=>e.category=="communication").value
-    let history_mathematics=user.history.find(e=>e.category=="mathematics").value
-    let history_decisionMaking=user.history.find(e=>e.category=="decisionMaking").value
-    let history_attentionSpan=user.history.find(e=>e.category=="attentionSpan").value
-  
+      let history_reasoning = user.history.find(
+        (e) => e.category == "reasoning"
+      ).value;
+      let history_timeManagement = user.history.find(
+        (e) => e.category == "timeManagement"
+      ).value;
+      let history_communication = user.history.find(
+        (e) => e.category == "communication"
+      ).value;
+      let history_mathematics = user.history.find(
+        (e) => e.category == "mathematics"
+      ).value;
+      let history_decisionMaking = user.history.find(
+        (e) => e.category == "decisionMaking"
+      ).value;
+      let history_attentionSpan = user.history.find(
+        (e) => e.category == "attentionSpan"
+      ).value;
 
       performanceMetrics = [
         {
@@ -135,7 +146,7 @@ export const userDetailsController = async (req, res) => {
             backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
             boxShadow: "0px 10px 20px 0px #e0c6f5",
           },
-          barValue: user.reasoning * 10,
+          barValue: user.reasoning,
           value: "25,970",
           series: [
             {
@@ -150,7 +161,7 @@ export const userDetailsController = async (req, res) => {
             backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
             boxShadow: "0px 10px 20px 0px #FDC0C7",
           },
-          barValue: user.timeManagement * 10,
+          barValue: user.timeManagement,
           value: "14,270",
           series: [
             {
@@ -166,7 +177,7 @@ export const userDetailsController = async (req, res) => {
               "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
             boxShadow: "0px 10px 20px 0px #F9D59B",
           },
-          barValue: user.communication * 10,
+          barValue: user.communication,
           value: "4,270",
           series: [
             {
@@ -182,7 +193,7 @@ export const userDetailsController = async (req, res) => {
               "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
             boxShadow: "0px 10px 20px 0px #F9D59B",
           },
-          barValue: user.mathematics * 10,
+          barValue: user.mathematics / 2 + user.academic_maths / 2,
           value: "4,270",
           series: [
             {
@@ -197,7 +208,7 @@ export const userDetailsController = async (req, res) => {
             backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
             boxShadow: "0px 10px 20px 0px #FDC0C7",
           },
-          barValue: user.decisionMaking * 10,
+          barValue: user.decisionMaking,
           value: "14,270",
           series: [
             {
@@ -212,7 +223,38 @@ export const userDetailsController = async (req, res) => {
             backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
             boxShadow: "0px 10px 20px 0px #e0c6f5",
           },
-          barValue: user.attentionSpan * 10,
+          barValue: user.attentionSpan,
+          value: "25,970",
+          series: [
+            {
+              name: "Attention Span",
+              data: history_attentionSpan,
+            },
+          ],
+        },
+        {
+          title: "Literature",
+          color: {
+            backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
+            boxShadow: "0px 10px 20px 0px #e0c6f5",
+          },
+          barValue: user.academic_literature,
+          value: "25,970",
+          series: [
+            {
+              name: "Attention Span",
+              data: history_attentionSpan,
+            },
+          ],
+        },
+        {
+          title: "Social Science",
+          color: {
+            backGround:
+              "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
+            boxShadow: "0px 10px 20px 0px #F9D59B",
+          },
+          barValue: user.academic_socialscience,
           value: "25,970",
           series: [
             {
@@ -223,9 +265,41 @@ export const userDetailsController = async (req, res) => {
         },
       ];
     }
+    const self = [
+      "reasoning",
+      "timeManagement",
+      "communication",
+      "mathematics",
+      "decisionMaking",
+      "attentionSpan",
+    ];
+    const teacher = [
+      "academic_socialscience",
+      "academic_literature",
+      "academic_maths",
+      "behaviour",
+      "extra_curricular",
+    ];
+    let selftotal = 0;
+    self.forEach((element) => {
+      selftotal += user[element];
+    });
+    let teachertotal = 0;
+    teacher.forEach((element) => {
+      teachertotal += user[element];
+    });
+    let finalvalue = (selftotal / 600) * 50 + (teachertotal / 500) * 50;
+    console.log(finalvalue);
+    console.log("total", selftotal, teachertotal);
     res.status(200).send({
       user: user.username,
       performanceMetrics,
+      facultyFeedback: user.faculty_feedback,
+      userdata: {
+        email: user.email,
+        username: user.username,
+      },
+      finalvalue:finalvalue,
     });
   } catch (error) {
     console.log(error);

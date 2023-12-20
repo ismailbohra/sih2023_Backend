@@ -51,6 +51,40 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  faculty_feedback: {
+    type: Number,
+    default: 0,
+  },
+  student_feedback: {
+    type: Number,
+    default: 0,
+  },
+  academic_socialscience: {
+    type: Number,
+    default: 0,
+  },
+  academic_literature: {
+    type: Number,
+    default: 0,
+  },
+  academic_maths: {
+    type: Number,
+    default: 0,
+  },
+  behaviour: {
+    type: Number,
+    default: 0,
+  },
+  extra_curricular: {
+    type: Number,
+    default: 0,
+  },
+  question_history: [
+    {
+      question_id: { type: String },
+      time: { type: Number },
+    },
+  ],
   history: [
     {
       category: String,

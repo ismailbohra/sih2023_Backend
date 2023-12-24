@@ -87,7 +87,6 @@ export const getQuestionController = async (req, res) => {
       status: true,
       msg: "success",
       data: academic_data,
-      data2: academic_data,
     });
   } catch (error) {
     console.log(error);

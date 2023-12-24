@@ -151,7 +151,7 @@ export const getQuestionController = async (req, res) => {
       ]);
 
       const randomAudioQuestion = await Question.aggregate([
-        { $match: { category, type: "Audio" } },
+        { $match: { category, type: "audio" } },
         { $sample: { size: 1 } },
       ]);
 

@@ -57,11 +57,9 @@ export const insertTestResponseController = async (req, res) => {
       });
 
       temptotal = (temptotal / maximumscore) * 100;
-      if (temptotal < 15) {
-        update_marks[element] = Math.floor(Math.random() * (30 - 15 + 1)) + 15;
-      } else {
+    
         update_marks[element] = temptotal;
-      }
+      
     });
     function findMaxWeightOption(question) {
       let maxWeight = -1; // Initialize with a value lower than any possible weight
